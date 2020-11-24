@@ -49,10 +49,10 @@ class Mandelbrot():
 
         def Mandelbrot_set_plot(self, Ztemp, dt):
                
-               plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (self.MinX, self.MaxX, self.MinY, self.MaxY))
-               plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
-               plt.ylabel("Im(c), max iter =300")
-               plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
+               matplotlib.axes.Axes.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (self.MinX, self.MaxX, self.MinY, self.MaxY))
+               matplotlib.axes.Axes.set_xlabel("Re(c), using numba jit compiler time: %f s" % dt)
+               matplotlib.axes.Axes.set_ylabel("Im(c), max iter =300")
+               matplotlib.axes.Axes.set_title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
                plt.savefig("mandelbrot_python_optimize_numba_jit.png")
                plt.show()
                plt.close()

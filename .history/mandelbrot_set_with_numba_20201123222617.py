@@ -1,4 +1,3 @@
-from matplotlib.pyplot import axes
 import numpy as np
 from numpy import NaN
 from numba.experimental import jitclass
@@ -57,7 +56,8 @@ class Mandelbrot():
                plt.show()
                plt.close()
                 
-def Plot_Mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt): 
+def Plot_Mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt):
+               
                plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (MinX, MaxX, MinY, MaxY))
                plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
                plt.ylabel("Im(c), max iter =300")

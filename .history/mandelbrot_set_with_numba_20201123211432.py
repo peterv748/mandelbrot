@@ -1,14 +1,12 @@
-from matplotlib.pyplot import axes
 import numpy as np
 from numpy import NaN
 from numba.experimental import jitclass
 from numba import int64, float64
-import time
 import matplotlib
 import matplotlib.pyplot as plt
+import time
 
 matplotlib.use("Qt5Agg")
-
 
 spec = [('MinX', float64),('MaxX',float64),('MinY', int64),('MaxY', int64),('Size_X',int64),('Size_Y',int64),('MaxIter',int64)]
 @jitclass(spec)
@@ -48,23 +46,14 @@ class Mandelbrot():
                 return (Z)
 
         def Mandelbrot_set_plot(self, Ztemp, dt):
-               
                plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (self.MinX, self.MaxX, self.MinY, self.MaxY))
                plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
                plt.ylabel("Im(c), max iter =300")
                plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
-               plt.savefig("mandelbrot_python_optimize_numba_jit.png")
+               plt.savefig("mandelbrot_python_optimaze_cuda_jit.png")
                plt.show()
-               plt.close()
                 
-def Plot_Mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt): 
-               plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (MinX, MaxX, MinY, MaxY))
-               plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
-               plt.ylabel("Im(c), max iter =300")
-               plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
-               plt.savefig("mandelbrot_python_optimize_numba_jit.png")
-               plt.show()
-               plt.close()
+
 
   
 def main():
@@ -83,14 +72,13 @@ def main():
         Z = mandelbrotObject.Mandelbrot_set()
         dt = time.time() - start
 
-        Plot_Mandelbrot(xmin, xmax, ymin, ymax, Z, dt)
-        #mandelbrotObject.Mandelbrot_set_plot(Z, dt)
+        mandelbrotObject.Mandelbrot_set_plot(Z, dt)
         #plt.imshow(Z, cmap = plt.cm.prism, interpolation = None, extent = (xmin, xmax, ymin, ymax))
         #plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
         #plt.ylabel("Im(c), max iter =300")
         #plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
         #plt.savefig("mandelbrot_python_optimize_numba_jit.png")
         #plt.show()
-        #plt.close()
+        plt.close()
 
 main()

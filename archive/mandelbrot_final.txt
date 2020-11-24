@@ -1,0 +1,45 @@
+from pylab import *
+from numpy import NaN
+from numba import jit
+import matplotlib.pyplot as plt
+
+@jit 
+def mandelbrot(creal,cimag,maxiter):
+    real = creal
+    imag = cimag
+    for n in range(maxiter):
+        real2 = real*real
+        imag2 = imag*imag
+        if real2 + imag2 > 4.0:
+            return n
+        imag = 2* real*imag + cimag
+        real = real2 - imag2 + creal       
+    return NaN
+
+@jit
+def mandelbrot_set(xmin,xmax,ymin,ymax,stepsize,maxiter):
+        X = arange(xmin, xmax, stepsize)
+        Y = arange(ymin, ymax, stepsize)
+        Z = zeros((len(Y), len(X)))
+ 
+        for iy, y in enumerate(Y):
+                print (iy, "of", len(Y))
+                for ix, x in enumerate(X):
+                        Z[iy,ix] = mandelbrot(x,y, maxiter)
+
+        return (Z)
+
+xmin = -2
+xmax = .5
+ymin = -1
+ymax = 1
+stepsize = .001
+maxiter = 200
+
+Z = mandelbrot_set(xmin, xmax, ymin, ymax, stepsize, maxiter)
+ 
+imshow(Z, cmap = plt.cm.prism, interpolation = 'none', extent = (xmin, xmax, ymin, ymax))
+xlabel("Re(c)")
+ylabel("Im(c)")
+savefig("mandelbrot_python.svg")
+show()

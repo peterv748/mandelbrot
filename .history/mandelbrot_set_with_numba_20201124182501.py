@@ -83,8 +83,8 @@ def main():
         Z = mandelbrotObject.Mandelbrot_set()
         dt = time.time() - start
 
-        Plot_Mandelbrot(xmin, xmax, ymin, ymax, Z, dt)
-        #mandelbrotObject.Mandelbrot_set_plot(Z, dt)
+        #Plot_Mandelbrot(xmin, xmax, ymin, ymax, Z, dt)
+        mandelbrotObject.Mandelbrot_set_plot(Z, dt)
         #plt.imshow(Z, cmap = plt.cm.prism, interpolation = None, extent = (xmin, xmax, ymin, ymax))
         #plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
         #plt.ylabel("Im(c), max iter =300")

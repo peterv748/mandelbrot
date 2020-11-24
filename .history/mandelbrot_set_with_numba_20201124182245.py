@@ -51,7 +51,7 @@ class Mandelbrot():
                
                plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (self.MinX, self.MaxX, self.MinY, self.MaxY))
                plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
-               plt.ylabel("Im(c), max iter =300")
+               plt.label("Im(c), max iter =300")
                plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
                plt.savefig("mandelbrot_python_optimize_numba_jit.png")
                plt.show()
@@ -83,8 +83,8 @@ def main():
         Z = mandelbrotObject.Mandelbrot_set()
         dt = time.time() - start
 
-        Plot_Mandelbrot(xmin, xmax, ymin, ymax, Z, dt)
-        #mandelbrotObject.Mandelbrot_set_plot(Z, dt)
+        #Plot_Mandelbrot(xmin, xmax, ymin, ymax, Z, dt)
+        mandelbrotObject.Mandelbrot_set_plot(Z, dt)
         #plt.imshow(Z, cmap = plt.cm.prism, interpolation = None, extent = (xmin, xmax, ymin, ymax))
         #plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
         #plt.ylabel("Im(c), max iter =300")
