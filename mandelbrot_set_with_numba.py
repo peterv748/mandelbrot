@@ -75,6 +75,5 @@ def main():
         dt = time.time() - start
 
         Plot_Mandelbrot(xmin, xmax, ymin, ymax, Z, dt)
-        
 
 main()
