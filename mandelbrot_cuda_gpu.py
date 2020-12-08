@@ -49,8 +49,17 @@ def mandel_kernel(min_x, max_x, min_y, max_y, X_size, Y_size, image,  iters):
         image[y, x] = mandelbrot(real, imag, iters)
 
 
+def Plot_Mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt): 
+               plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (MinX, MaxX, MinY, MaxY))
+               plt.xlabel("Re(c), using gpu time: %f s" % dt)
+               plt.ylabel("Im(c), max iter =300")
+               plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
+               plt.savefig("mandelbrot_python_gpu.png")
+               plt.show()
+               plt.close()
 
-#initialisations of constants
+
+#initializations of constants
 def main():
     X_size = 4096
     Y_size = 4096
@@ -72,15 +81,8 @@ def main():
     dt = time.time() - start
     d_image.copy_to_host(image)
 
-
-
 #plot image in window
-    plt.imshow(image, cmap = plt.cm.prism, interpolation = 'none', extent = (xmin, xmax, ymin, ymax))
-    plt.xlabel("Re(c), using cuda nvidia processing time: %f s" % dt)
-    plt.ylabel("Im(c), maxiter 300")
-    plt.title("mandelbrot set, image size (x,y): 4096 x 4096 pixels")
-    plt.savefig("mandelbrot_python_optimize_cuda_gpu.png")
-    plt.show()
-    plt.close()
+    Plot_Mandelbrot(xmin, xmax, ymin, ymax, image, dt)
+
     
 main()
