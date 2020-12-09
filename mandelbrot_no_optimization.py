@@ -64,21 +64,21 @@ def main():
     """
 #initialization of constants
 
-    X_MIN = -2
-    X_MAX = .5
-    Y_MIN = -1
-    Y_MAX = 1
-    X_SIZE = 4096
-    Y_SIZE = 4096
-    MAX_ITERATIONS = 300
+    x_min = -2
+    x_max = .5
+    y_min = -1
+    y_max = 1
+    x_size = 4096
+    y_size = 4096
+    max_iterations = 300
 
 # start calculation
     start = time.time()
-    image = mandelbrot_set(X_MIN,X_MAX,Y_MIN,Y_MAX,X_SIZE, Y_SIZE, MAX_ITERATIONS)
+    image = mandelbrot_set(x_min,x_max,y_min,y_max,x_size, y_size, max_iterations)
     time_elapsed = time.time() - start
 
 
 #plot image in window
-    plot_mandelbrot(X_MIN,X_MAX,Y_MIN,Y_MAX, image, time_elapsed)
+    plot_mandelbrot(x_min,x_max,y_min,y_max, image, time_elapsed)
 
 main()

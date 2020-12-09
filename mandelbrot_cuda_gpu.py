@@ -69,28 +69,28 @@ def main():
     """
     Main function
     """
-    X_SIZE = 4096
-    Y_SIZE = 4096
+    x_size = 4096
+    y_size = 4096
     block_dim = (32, 32)
     grid_dim = (128,128)
-    X_MIN = -2
-    X_MAX = .5
-    Y_MIN = -1
-    Y_MAX = 1
-    MAX_ITERATIONS = 300
-    image = np.zeros((Y_SIZE, X_SIZE), dtype = np.uint32)
+    x_min = -2
+    x_max = .5
+    y_min = -1
+    y_max = 1
+    max_iterations = 300
+    image = np.zeros((y_size, x_size), dtype = np.uint32)
 
 
 # start calculations
 
     d_image = cuda.to_device(image)
     start = time.time()
-    mandel_kernel[grid_dim, block_dim](X_MIN,X_MAX, Y_MIN, Y_MAX, X_SIZE, Y_SIZE, \
-                    d_image, MAX_ITERATIONS)
+    mandel_kernel[grid_dim, block_dim](x_min,x_max,y_min,y_max,x_size, y_size, \
+                    d_image, max_iterations)
     time_elapsed = time.time() - start
     d_image.copy_to_host(image)
 
-    plot_mandelbrot(X_MIN,X_MAX, Y_MIN, Y_MAX, image,time_elapsed)
+    plot_mandelbrot(x_min,x_max,y_min,y_max, image,time_elapsed)
 
 
 main()
