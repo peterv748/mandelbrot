@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 @cuda.jit(device=True)
 def mandelbrot_calculation(c_real,c_imag,max_iter):
     """
-    calculation of mandelbrot set formula using the Numba package and 
+    calculation of mandelbrot set formula using the Numba package and
     the included cuda support functions to use the GPU of the machine
     """
     real = c_real

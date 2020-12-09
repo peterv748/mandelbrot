@@ -15,7 +15,7 @@ matplotlib.use("Qt5Agg")
 
 def mandelbrot_calculation(c_real,c_imag,max_iter):
     """
-    calculation of mandelbrot set formula 
+    calculation of mandelbrot set formula
     """
     real = c_real
     imag = c_imag
@@ -39,16 +39,16 @@ def mandelbrot_set(xmin,xmax,ymin,ymax,x_size, y_size, max_iter):
     y_axis_array = np.arange(ymin, ymax, stepsize_y)
     image = np.zeros((len(y_axis_array), len(x_axis_array)))
 
-    for j, y in enumerate(y_axis_array):
-        for i, x in enumerate(x_axis_array):
-            image[j,i] = mandelbrot_calculation(x,y, max_iter)
+    for j, y_coord in enumerate(y_axis_array):
+        for i, x_coord in enumerate(x_axis_array):
+            image[j,i] = mandelbrot_calculation(x_coord,y_coord, max_iter)
     return image
 
 def plot_mandelbrot(min_x, max_x, min_y, max_y, image_temp, elapsed_time):
     """
     plotting the calculated mandelbrot set and writing it to file
     """
-    
+
     plt.imshow(image_temp, cmap = plt.cm.prism, interpolation = None, \
                 extent = (min_x, max_x, min_y, max_y))
     plt.xlabel("Re(c), using no optimization time: %f s" % elapsed_time)
