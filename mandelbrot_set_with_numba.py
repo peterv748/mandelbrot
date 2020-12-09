@@ -10,45 +10,45 @@ import matplotlib.pyplot as plt
 matplotlib.use("Qt5Agg")
 
 
-spec = [('MinX', float64),('MaxX',float64),('MinY', int64),('MaxY', int64),('Size_X',int64),('Size_Y',int64),('MaxIter',int64)]
+spec = [('min_x', float64),('max_x',float64),('min_y', int64),('max_y', int64),('size_x',int64),('size_y',int64),('maxIter',int64)]
 @jitclass(spec)
 class Mandelbrot():
 
-    def __init__(self,xmin,xmax,ymin,ymax,X_size, Y_size, maxiter):
-        self.MinX = xmin
-        self.MaxX = xmax
-        self.MinY = ymin
-        self.MaxY = ymax
-        self.Size_X = X_size
-        self.Size_Y = Y_size
-        self.MaxIter = maxiter
+    def __init__(self,x_min,x_max,y_min,y_max,x_size, y_size, max_iter):
+        self.min_x = x_min
+        self.max_x = x_max
+        self.min_y = y_min
+        self.max_y = y_max
+        self.size_x = x_size
+        self.size_y = y_size
+        self.maxIter = max_iter
 
-    def MandelbrotCalculation(self,creal,cimag):
+    def mandelbrot_calculation(self,creal,cimag):
         real = creal
         imag = cimag
-        for n in range(self.MaxIter):
+        for n in range(self.maxIter):
             real2 = real*real
             imag2 = imag*imag
             if real2 + imag2 > 4.0:
                 return n
             imag = 2* real*imag + cimag
             real = real2 - imag2 + creal
-            return self.MaxIter
+            return self.maxIter
 
 
-    def Mandelbrot_set(self):
-        stepsize_x = (self.MaxX - self.MinX)/self.Size_X
-        stepsize_y = (self.MaxY - self.MinY)/self.Size_Y
-        X = np.arange(self.MinX, self.MaxX, stepsize_x)
-        Y = np.arange(self.MinY, self.MaxY, stepsize_y)
+    def mandelbrot_set(self):
+        stepsize_x = (self.max_x - self.min_x)/self.size_x
+        stepsize_y = (self.max_y - self.min_y)/self.size_y
+        X = np.arange(self.min_x, self.max_x, stepsize_x)
+        Y = np.arange(self.min_y, self.max_y, stepsize_y)
         Z = np.zeros((len(Y), len(X)))
         for iy, y in enumerate(Y):
             for ix, x in enumerate(X):
-                Z[iy,ix] = self.MandelbrotCalculation(x,y)
-        return (Z)
+                Z[iy,ix] = self.mandelbrot_calculation(x,y)
+        return Z
 
 
-def Plot_Mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt):
+def plot_mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt):
     plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (MinX, MaxX, MinY, MaxY))
     plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
     plt.ylabel("Im(c), max iter =300")
@@ -60,20 +60,20 @@ def Plot_Mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt):
 
 def main():
 
-    xmin = -2
-    xmax = .5
-    ymin = -1
-    ymax = 1
-    X_size = 4096
-    Y_size = 4096
-    maxiter = 300
+    x_min = -2
+    x_max = .5
+    y_min = -1
+    y_max = 1
+    x_size = 4096
+    y_size = 4096
+    max_iter = 300
 
-    mandelbrotObject = Mandelbrot(xmin,xmax,ymin,ymax,X_size, Y_size, maxiter)
+    mandelbrot_object = Mandelbrot(x_min,x_max,y_min,y_max,x_size, y_size, max_iter)
 
     start = time.time()
-    Z = mandelbrotObject.Mandelbrot_set()
+    Z = mandelbrot_object.mandelbrot_set()
     dt = time.time() - start
 
-    Plot_Mandelbrot(xmin, xmax, ymin, ymax, Z, dt)
+    plot_mandelbrot(x_min, x_max, y_min, y_max, Z, dt)
 
 main()
