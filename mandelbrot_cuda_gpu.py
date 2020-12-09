@@ -50,8 +50,8 @@ def mandel_kernel(min_x, max_x, min_y, max_y, x_size, y_size, image, iters):
         image[y, x] = mandelbrot_calculation(real, imag, iters)
 
 
-def plot_mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt):
-    plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (MinX, MaxX, MinY, MaxY))
+def plot_mandelbrot(min_x, max_x, min_y, max_y, Z_temp, dt):
+    plt.imshow(Z_temp, cmap = plt.cm.prism, interpolation = None, extent = (min_x, max_x, min_y, max_y))
     plt.xlabel("Re(c), using gpu time: %f s" % dt)
     plt.ylabel("Im(c), max iter =300")
     plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
