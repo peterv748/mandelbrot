@@ -4,11 +4,9 @@ Created on Fri Oct 19 14:44:19 2018
 
 @author: peter
 """
-
-import numpy as np
-from numpy import NaN
-from numba import cuda
 import time
+import numpy as np
+from numba import cuda
 import matplotlib.pyplot as plt
 
 
@@ -30,24 +28,19 @@ def mandelbrot_calculation(c_real,c_imag,max_iter):
 
 @cuda.jit
 def mandel_kernel(min_x, max_x, min_y, max_y, x_size, y_size, image, iters):
-
-
     pixel_size_x = (max_x - min_x) / x_size
     pixel_size_y = (max_y - min_y) / y_size
-
     start_x, start_y = cuda.grid(2)
-
-
     start_x = cuda.blockDim.x * cuda.blockIdx.x + cuda.threadIdx.x
     start_y = cuda.blockDim.y * cuda.blockIdx.y + cuda.threadIdx.y
-    grid_x = cuda.gridDim.x * cuda.blockDim.x;
-    grid_y = cuda.gridDim.y * cuda.blockDim.y;
+    grid_x = cuda.gridDim.x * cuda.blockDim.x
+    grid_y = cuda.gridDim.y * cuda.blockDim.y
 
     for x in range(start_x, x_size, grid_x):
-      real = min_x + x * pixel_size_x
-      for y in range(start_y, y_size, grid_y):
-        imag = min_y + y * pixel_size_y
-        image[y, x] = mandelbrot_calculation(real, imag, iters)
+        real = min_x + x * pixel_size_x
+        for y in range(start_y, y_size, grid_y):
+            imag = min_y + y * pixel_size_y
+            image[y, x] = mandelbrot_calculation(real, imag, iters)
 
 
 def plot_mandelbrot(min_x, max_x, min_y, max_y, Z_temp, dt):

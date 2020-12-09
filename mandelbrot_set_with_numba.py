@@ -1,8 +1,7 @@
+import time
 import numpy as np
-from numpy import NaN
 from numba.experimental import jitclass
 from numba import int64, float64
-import time
 import matplotlib
 import matplotlib.pyplot as plt
 
@@ -20,19 +19,19 @@ class Mandelbrot():
         self.max_y = y_max
         self.size_x = x_size
         self.size_y = y_size
-        self.maxIter = max_iter
+        self.max_Iter = max_iter
 
     def mandelbrot_calculation(self,c_real,c_imag):
         real = c_real
         imag = c_imag
-        for n in range(self.maxIter):
+        for n in range(self.max_Iter):
             real2 = real*real
             imag2 = imag*imag
             if real2 + imag2 > 4.0:
                 return n
             imag = 2* real*imag + c_imag
             real = real2 - imag2 + c_real
-            return self.maxIter
+            return self.max_Iter
 
 
     def mandelbrot_set(self):
