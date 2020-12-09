@@ -1,4 +1,3 @@
-from matplotlib.pyplot import axes
 import numpy as np
 from numpy import NaN
 from numba.experimental import jitclass
@@ -23,16 +22,16 @@ class Mandelbrot():
         self.size_y = y_size
         self.maxIter = max_iter
 
-    def mandelbrot_calculation(self,creal,cimag):
-        real = creal
-        imag = cimag
+    def mandelbrot_calculation(self,c_real,c_imag):
+        real = c_real
+        imag = c_imag
         for n in range(self.maxIter):
             real2 = real*real
             imag2 = imag*imag
             if real2 + imag2 > 4.0:
                 return n
-            imag = 2* real*imag + cimag
-            real = real2 - imag2 + creal
+            imag = 2* real*imag + c_imag
+            real = real2 - imag2 + c_real
             return self.maxIter
 
 
@@ -48,8 +47,8 @@ class Mandelbrot():
         return Z
 
 
-def plot_mandelbrot(MinX, MaxX, MinY, MaxY, Ztemp, dt):
-    plt.imshow(Ztemp, cmap = plt.cm.prism, interpolation = None, extent = (MinX, MaxX, MinY, MaxY))
+def plot_mandelbrot(min_x, max_x, min_y, max_y, Z_temp, dt):
+    plt.imshow(Z_temp, cmap = plt.cm.prism, interpolation = None, extent = (min_x, max_x, min_y, max_y))
     plt.xlabel("Re(c), using numba jit compiler time: %f s" % dt)
     plt.ylabel("Im(c), max iter =300")
     plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
