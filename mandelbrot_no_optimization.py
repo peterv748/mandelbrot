@@ -1,7 +1,7 @@
 """
 Created on Fri Oct 19 14:44:19 2018
 Updated on 9 December 2020
-adhering to Pylint standards
+adhering to Py_lint standards
 
 @author: peter
 """
@@ -49,7 +49,7 @@ def plot_mandelbrot(min_x, max_x, min_y, max_y, Z_temp, dt):
 
 def main():
 
-#initialisation of constants
+#initialization of constants
 
     X_MIN = -2
     X_MAX = .5

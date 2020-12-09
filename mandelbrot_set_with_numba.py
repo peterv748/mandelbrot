@@ -1,7 +1,7 @@
 """
 Created on Fri Oct 19 14:44:19 2018
 Updated on 9 December 2020
-adhering to Pylint standards
+adhering to Py_lint standards
 
 @author: peter
 """
@@ -78,8 +78,8 @@ def main():
 
     start = time.time()
     image = mandelbrot_object.mandelbrot_set()
-    dt = time.time() - start
+    time_elapsed = time.time() - start
 
-    plot_mandelbrot(X_MIN,X_MAX,Y_MIN,Y_MAX, image, dt)
+    plot_mandelbrot(X_MIN,X_MAX,Y_MIN,Y_MAX, image, time_elapsed)
 
 main()

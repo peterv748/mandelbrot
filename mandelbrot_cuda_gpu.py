@@ -2,7 +2,7 @@
 """
 Created on Fri Oct 19 14:44:19 2018
 Updated on 9 December 2020
-adhering to Pylint standards
+adhering to Py_lint standards
 
 @author: peter
 """
