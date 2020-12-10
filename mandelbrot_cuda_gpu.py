@@ -77,10 +77,10 @@ def main():
                         'y_axis_max': 1, \
                         'x_size': 4096, \
                         'y_size': 4096 }
-    
-    image_rectangle = np.array([-2, 0.5, -1, 1])                   
-    image_size = np.array([4096,4096]) 
-    
+
+    image_rectangle = np.array([-2, 0.5, -1, 1])
+    image_size = np.array([4096,4096])
+
     block_dim = (32, 32)
     grid_dim = (128,128)
     max_iterations = 300

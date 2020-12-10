@@ -65,7 +65,7 @@ def main():
     """
 #initialization of constants
 
-    
+
     max_iterations = 300
     image_rectangle = { 'x_axis_min':-2,\
                         'x_axis_max': 0.5, \
