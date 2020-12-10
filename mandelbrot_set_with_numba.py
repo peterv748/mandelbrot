@@ -24,16 +24,16 @@ class Mandelbrot():
     """
     mandelbrot class
     """
-    def __init__(self,x_min,x_max,y_min,y_max,x_size, y_size, max_iter):
+    def __init__(self,image_rect, im_size, max_iter):
         """
         init of class variables
         """
-        self.min_x = x_min
-        self.max_x = x_max
-        self.min_y = y_min
-        self.max_y = y_max
-        self.size_x = x_size
-        self.size_y = y_size
+        self.min_x = image_rect[0]
+        self.max_x = image_rect[1]
+        self.min_y = image_rect[2]
+        self.max_y = image_rect[3]
+        self.size_x = im_size[0]
+        self.size_y = im_size[1]
         self.max_iterations = max_iter
 
     def mandelbrot_calculation(self,c_real,c_imag):
@@ -67,17 +67,18 @@ class Mandelbrot():
         return image_array
 
 
-def plot_mandelbrot(min_x, max_x, min_y, max_y, image_temp, elapsed_time):
+def plot_mandelbrot(image_rect, im_size, image_temp, elapsed_time, iterations):
     """
     plotting the calculated mandelbrot set and writing it to file
     """
-
-    plt.imshow(image_temp, cmap = plt.cm.prism, \
-                interpolation = None, extent = (min_x, max_x, min_y, max_y))
-    plt.xlabel("Re(c), optimization using numba jit compiler time: %f s" % elapsed_time)
-    plt.ylabel("Im(c), max iter =300")
-    plt.title( "mandelbrot set, image size (x,y): 4096 x 4096 pixels")
-    plt.savefig("mandelbrot_optimization_using_numba_jit.png")
+    image_dimension = str(im_size[0]) + " x " + str(im_size[1])
+    plt.imshow(image_temp, cmap = plt.cm.prism, interpolation = None, \
+                extent = (image_rect[0], image_rect[1], \
+                image_rect[2], image_rect[3]))
+    plt.xlabel("Re(c), using jit optimization time: {0}".format(elapsed_time))
+    plt.ylabel("Im(c), max iter: {0}:".format(iterations))
+    plt.title( "mandelbrot set, image size (x,y): {0}".format(image_dimension))
+    plt.savefig("mandelbrot_numba_jit_optimization.png")
     plt.show()
     plt.close()
 
@@ -86,19 +87,17 @@ def main():
     """
     Main function
     """
-    x_min = -2
-    x_max = .5
-    y_min = -1
-    y_max = 1
-    x_size = 4096
-    y_size = 4096
+    image_rectangle = np.array([-2, 0.5, -1, 1])
+                            
+    image_size = np.array([4096,4096]) 
+    
     max_iterations = 300
 
-    mandelbrot_object = Mandelbrot(x_min,x_max,y_min,y_max,x_size, y_size, max_iterations)
+    mandelbrot_object = Mandelbrot(image_rectangle, image_size, max_iterations)
     start = time.time()
     image = mandelbrot_object.mandelbrot_set()
     time_elapsed = time.time() - start
 
-    plot_mandelbrot(x_min,x_max,y_min,y_max, image, time_elapsed)
+    plot_mandelbrot(image_rectangle, image_size, image, time_elapsed, max_iterations)
 
 main()
