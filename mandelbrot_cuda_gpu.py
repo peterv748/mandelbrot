@@ -71,12 +71,6 @@ def main():
     """
     Main function
     """
-    image_rect = { 'x_axis_min':-2,\
-                        'x_axis_max': 0.5, \
-                        'y_axis_min': -1, \
-                        'y_axis_max': 1, \
-                        'x_size': 4096, \
-                        'y_size': 4096 }
 
     image_rectangle = np.array([-2, 0.5, -1, 1])
     image_size = np.array([4096,4096])
