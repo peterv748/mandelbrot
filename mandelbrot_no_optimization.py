@@ -13,36 +13,53 @@ import matplotlib.pyplot as plt
 
 matplotlib.use("Qt5Agg")
 
-def mandelbrot_calculation(c_real,c_imag,max_iter):
+class Mandelbrot():
     """
-    calculation of mandelbrot set formula
+    mandelbrot class
     """
-    real = c_real
-    imag = c_imag
-    for i in range(max_iter):
-        real2 = real*real
-        imag2 = imag*imag
-        if real2 + imag2 > 4.0:
-            return i
-        imag = 2* real*imag + c_imag
-        real = real2 - imag2 + c_real
-    return max_iter
 
+    def __init__(self,image_rect, max_iter):
+        """
+        init of class variables
+        """
+        self.min_x = image_rect['x_axis_min']
+        self.max_x = image_rect['x_axis_max']
+        self.min_y = image_rect['y_axis_min']
+        self.max_y = image_rect['y_axis_max']
+        self.size_x = image_rect['x_size']
+        self.size_y = image_rect['y_size']
+        self.max_iterations = max_iter
+    
+    def mandelbrot_calculation(self, c_real,c_imag):
+        """
+        calculation of mandelbrot set formula
+        """
+        real = c_real
+        imag = c_imag
+        for i in range(self.max_iterations):
+            real2 = real*real
+            imag2 = imag*imag
+            if real2 + imag2 > 4.0:
+                return i
+            imag = 2* real*imag + c_imag
+            real = real2 - imag2 + c_real
+        return self.max_iterations
 
-def mandelbrot_set(image_rect, max_iter):
-    """
-    calclation of the mandelbrot image in a 2-D array
-    """
-    stepsize_x = (image_rect['x_axis_max'] - image_rect['x_axis_min']) / image_rect['x_size']
-    stepsize_y = (image_rect['y_axis_max'] - image_rect['y_axis_min']) / image_rect['y_size']
-    x_axis_array = np.arange(image_rect['x_axis_min'], image_rect['x_axis_max'], stepsize_x)
-    y_axis_array = np.arange(image_rect['y_axis_min'], image_rect['y_axis_max'], stepsize_y)
-    image = np.zeros((len(y_axis_array), len(x_axis_array)))
+    def mandelbrot_set(self):
+        """
+        calclation of the mandelbrot image in a 2-D array
+        """
+        stepsize_x = (self.max_x - self.min_x)/self.size_x
+        stepsize_y = (self.max_y - self.min_y)/self.size_y
+        x_axis_array = np.arange(self.min_x, self.max_x, stepsize_x)
+        y_axis_array = np.arange(self.min_y, self.max_y, stepsize_y)
+        image_array = np.zeros((len(y_axis_array), len(x_axis_array)))
 
-    for j, y_coord in enumerate(y_axis_array):
-        for i, x_coord in enumerate(x_axis_array):
-            image[j,i] = mandelbrot_calculation(x_coord,y_coord, max_iter)
-    return image
+        for j, y_coord in enumerate(y_axis_array):
+            for i, x_coord in enumerate(x_axis_array):
+                image_array[j,i] = self.mandelbrot_calculation(x_coord,y_coord)
+        return image_array
+
 
 def plot_mandelbrot(image_rect, image_temp, elapsed_time, iterations):
     """
@@ -73,9 +90,10 @@ def main():
                         'y_axis_max': 1, \
                         'x_size': 4096, \
                         'y_size': 4096 }
-# start calculation
+    
+    mandelbrot_object = Mandelbrot(image_rectangle, max_iterations)
     start = time.time()
-    image = mandelbrot_set(image_rectangle, max_iterations)
+    image = mandelbrot_object.mandelbrot_set()
     time_elapsed = time.time() - start
 
 

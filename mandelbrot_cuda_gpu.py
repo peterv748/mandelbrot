@@ -31,7 +31,7 @@ def mandelbrot_calculation(c_real,c_imag,max_iter):
 
 
 @cuda.jit
-def mandel_kernel(im_rect, im_size, image, iters):
+def mandel_kernel(im_rect, image_array, im_size, iters):
     """
     calclation of the mandelbrot image in a 2-D array
     """
@@ -42,13 +42,12 @@ def mandel_kernel(im_rect, im_size, image, iters):
     start_y = cuda.blockDim.y * cuda.blockIdx.y + cuda.threadIdx.y
     grid_x = cuda.gridDim.x * cuda.blockDim.x
     grid_y = cuda.gridDim.y * cuda.blockDim.y
-
+    
     for i in range(start_x, im_size[0], grid_x):
         real = im_rect[0] + i * pixel_size_x
         for j in range(start_y, im_size[1], grid_y):
             imag = im_rect[2] + j * pixel_size_y
-            image[j, i] = mandelbrot_calculation(real, imag, iters)
-
+            image_array[j, i] = mandelbrot_calculation(real, imag, iters)
 
 def plot_mandelbrot(image_rect, im_size, image_temp, elapsed_time, iterations):
     """
@@ -85,8 +84,8 @@ def main():
 
     d_image = cuda.to_device(image)
     start = time.time()
-    mandel_kernel[grid_dim, block_dim](image_rectangle, image_size, \
-                    d_image, max_iterations)
+    mandel_kernel[grid_dim, block_dim](image_rectangle, d_image, \
+                    image_size, max_iterations)
     time_elapsed = time.time() - start
     d_image.copy_to_host(image)
 

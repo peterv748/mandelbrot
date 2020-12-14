@@ -51,7 +51,6 @@ class Mandelbrot():
             real = real2 - imag2 + c_real
         return self.max_iterations
 
-
     def mandelbrot_set(self):
         """
         calclation of the mandelbrot image in a 2-D array
@@ -61,6 +60,7 @@ class Mandelbrot():
         x_axis_array = np.arange(self.min_x, self.max_x, stepsize_x)
         y_axis_array = np.arange(self.min_y, self.max_y, stepsize_y)
         image_array = np.zeros((len(y_axis_array), len(x_axis_array)))
+        
         for j, y_coord in enumerate(y_axis_array):
             for i, x_coord in enumerate(x_axis_array):
                 image_array[j,i] = self.mandelbrot_calculation(x_coord,y_coord)
