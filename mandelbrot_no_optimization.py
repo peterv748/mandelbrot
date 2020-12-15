@@ -66,7 +66,7 @@ def plot_mandelbrot(image_rect, image_temp, elapsed_time, iterations):
     plotting the calculated mandelbrot set and writing it to file
     """
     image_dimension = str(image_rect['x_size']) + " x " + str(image_rect['y_size'])
-    plt.imshow(image_temp, cmap = plt.cm.prism, interpolation = None, \
+    plt.imshow(image_temp, cmap = plt.prism(), interpolation = None, \
                 extent = (image_rect['x_axis_min'], image_rect['x_axis_max'], \
                 image_rect['y_axis_min'], image_rect['y_axis_max']))
     plt.xlabel("Re(c), using no optimization time: {0}".format(elapsed_time))

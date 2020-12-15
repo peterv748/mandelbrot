@@ -54,7 +54,7 @@ def plot_mandelbrot(image_rect, im_size, image_temp, elapsed_time, iterations):
     plotting the calculated mandelbrot set and writing it to file
     """
     image_dimension = str(im_size[0]) + " x " + str(im_size[1])
-    plt.imshow(image_temp, cmap = plt.cm.prism, interpolation = None, \
+    plt.imshow(image_temp, cmap = plt.prism(), interpolation = None, \
                 extent = (image_rect[0], image_rect[1], \
                 image_rect[2], image_rect[3]))
     plt.xlabel("Re(c), using gpu calculation time: {0}".format(elapsed_time))
