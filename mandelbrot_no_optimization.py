@@ -29,7 +29,7 @@ class Mandelbrot():
         self.size_x = image_rect['x_size']
         self.size_y = image_rect['y_size']
         self.max_iterations = max_iter
-    
+
     def mandelbrot_calculation(self, c_real,c_imag):
         """
         calculation of mandelbrot set formula
@@ -90,7 +90,7 @@ def main():
                         'y_axis_max': 1, \
                         'x_size': 4096, \
                         'y_size': 4096 }
-    
+
     mandelbrot_object = Mandelbrot(image_rectangle, max_iterations)
     start = time.time()
     image = mandelbrot_object.mandelbrot_set()
