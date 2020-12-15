@@ -1,5 +1,4 @@
 numpy
 numba
-numba.experimental
 matplotlib
 matplotlib.pyplot
