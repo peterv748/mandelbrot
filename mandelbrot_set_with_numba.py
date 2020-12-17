@@ -22,13 +22,13 @@ class OptimizedMandelbrot(class_Mandelbrot.Mandelbrot):
     """
     Mandelbrot set calculation using numba jit optimization
     """
-        
-   
+
+
     def __init__(self,image_rect, im_size, max_iter):
 
         """
         init of class variables
-        """     
+        """
         self.min_x = image_rect[0]
         self.max_x = image_rect[1]
         self.min_y = image_rect[2]
