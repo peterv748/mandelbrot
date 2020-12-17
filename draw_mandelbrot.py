@@ -21,11 +21,11 @@ def plot_mandelbrot(image_rect, im_size, image_temp, elapsed_time, iterations):
     plt.savefig("mandelbrot_numba_jit_optimization.png")
     plt.show()
     plt.close()
-    
+
 if __name__ == "__main__":
     import numpy as np
-    
-    max_iterations = 300
+
+    MAXIMUM_ITERATIONS = 300
     image_rectangle = np.array([-2, 0.5, -1, 1])
     image_size = np.array([4096,4096])
 
@@ -34,5 +34,6 @@ if __name__ == "__main__":
     x_axis_array = np.arange(image_rectangle[0],image_rectangle[1], stepsize_x)
     y_axis_array = np.arange(image_rectangle[2], image_rectangle[3], stepsize_y)
     image_array = np.zeros((len(y_axis_array), len(x_axis_array)))
-    elapsed_time = 10
-    plot_mandelbrot(image_rectangle, image_size, image_array, elapsed_time, max_iterations)
+    TIME_ELAPSED = 10
+    plot_mandelbrot(image_rectangle, image_size, image_array, TIME_ELAPSED, MAXIMUM_ITERATIONS)
+    

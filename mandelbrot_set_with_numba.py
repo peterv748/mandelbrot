@@ -11,18 +11,18 @@ import numpy as np
 from numba.experimental import jitclass
 from numba import int64, float64
 import draw_mandelbrot
-import class_Mandelbrot
+import class_mandelbrot
 
 
 spec = [('min_x', float64),('max_x',float64), \
         ('min_y', float64),('max_y', float64),('size_x',int64), \
         ('size_y',int64),('max_iterations',int64)]
 @jitclass(spec)
-class Optimized_Mandelbrot(class_Mandelbrot.Mandelbrot):
+class OptimizedMandelbrot(class_mandelbrot.Mandelbrot):
     """
     Mandelbrot set calculation using numba jit optimization
     """
-    
+
     def __init__(self,image_rect, im_size, max_iter):
         """
         init of class variables
@@ -34,7 +34,7 @@ class Optimized_Mandelbrot(class_Mandelbrot.Mandelbrot):
         self.size_x = im_size[0]
         self.size_y = im_size[1]
         self.max_iterations = max_iter
-        
+
     def optimized_mandelbrot_set(self):
         return self.mandelbrot_set()
 
@@ -48,11 +48,12 @@ def main():
 
     max_iterations = 300
 
-    mandelbrot_object = Optimized_Mandelbrot(image_rectangle, image_size, max_iterations)
+    mandelbrot_object = OptimizedMandelbrot(image_rectangle, image_size, max_iterations)
     start = time.time()
     image = mandelbrot_object.optimized_mandelbrot_set()
     time_elapsed = time.time() - start
 
-    draw_mandelbrot.plot_mandelbrot(image_rectangle, image_size, image, time_elapsed, max_iterations)
+    draw_mandelbrot.plot_mandelbrot(image_rectangle, image_size, image, \
+                                    time_elapsed, max_iterations)
 
 main()

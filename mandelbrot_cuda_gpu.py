@@ -9,8 +9,6 @@ adhering to Py_lint standards
 import time
 import numpy as np
 from numba import cuda
-import matplotlib.pyplot as plt
-import class_Mandelbrot
 import draw_mandelbrot
 
 @cuda.jit(device=True)
@@ -43,7 +41,7 @@ def mandel_kernel(im_rect, image_array, im_size, iters):
     start_y = cuda.blockDim.y * cuda.blockIdx.y + cuda.threadIdx.y
     grid_x = cuda.gridDim.x * cuda.blockDim.x
     grid_y = cuda.gridDim.y * cuda.blockDim.y
-   
+
     for i in range(start_x, im_size[0], grid_x):
         real = im_rect[0] + i * pixel_size_x
         for j in range(start_y, im_size[1], grid_y):
