@@ -8,10 +8,12 @@ adhering to Py_lint standards
 """
 import time
 import numpy as np
+from numba import jit
 from numba import cuda
 import draw_mandelbrot
 
-@cuda.jit(device=True)
+#@cuda.jit(device=True)
+@jit
 def mandelbrot_calculation(c_real,c_imag,max_iter):
     """
     calculation of mandelbrot set formula using the Numba package and
@@ -27,7 +29,7 @@ def mandelbrot_calculation(c_real,c_imag,max_iter):
         imag = 2* real*imag + c_imag
         real = real2 - imag2 + c_real
     return max_iter
-
+    
 
 @cuda.jit
 def mandel_kernel(im_rect, image_array, im_size, iters):
