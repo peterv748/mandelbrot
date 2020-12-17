@@ -10,7 +10,8 @@ import time
 import numpy as np
 from numba import cuda
 import matplotlib.pyplot as plt
-
+import class_Mandelbrot
+import draw_mandelbrot
 
 @cuda.jit(device=True)
 def mandelbrot_calculation(c_real,c_imag,max_iter):
@@ -42,27 +43,12 @@ def mandel_kernel(im_rect, image_array, im_size, iters):
     start_y = cuda.blockDim.y * cuda.blockIdx.y + cuda.threadIdx.y
     grid_x = cuda.gridDim.x * cuda.blockDim.x
     grid_y = cuda.gridDim.y * cuda.blockDim.y
-
+   
     for i in range(start_x, im_size[0], grid_x):
         real = im_rect[0] + i * pixel_size_x
         for j in range(start_y, im_size[1], grid_y):
             imag = im_rect[2] + j * pixel_size_y
             image_array[j, i] = mandelbrot_calculation(real, imag, iters)
-
-def plot_mandelbrot(image_rect, im_size, image_temp, elapsed_time, iterations):
-    """
-    plotting the calculated mandelbrot set and writing it to file
-    """
-    image_dimension = str(im_size[0]) + " x " + str(im_size[1])
-    plt.imshow(image_temp, cmap = plt.prism(), interpolation = None, \
-                extent = (image_rect[0], image_rect[1], \
-                image_rect[2], image_rect[3]))
-    plt.xlabel("Re(c), using gpu calculation time: {0}".format(elapsed_time))
-    plt.ylabel("Im(c), max iter: {0}:".format(iterations))
-    plt.title( "mandelbrot set, image size (x,y): {0}".format(image_dimension))
-    plt.savefig("mandelbrot_gpu_optimization.png")
-    plt.show()
-    plt.close()
 
 
 #initializations of constants
@@ -89,7 +75,7 @@ def main():
     time_elapsed = time.time() - start
     d_image.copy_to_host(image)
 
-    plot_mandelbrot(image_rectangle, image_size, image,time_elapsed, max_iterations)
+    draw_mandelbrot.plot_mandelbrot(image_rectangle, image_size, image,time_elapsed, max_iterations)
 
 
 main()
