@@ -22,14 +22,15 @@ def main():
     image_rectangle = np.array([-2, 0.5, -1, 1])
     image_size = np.array([4096,4096])
 
-    mandelbrot_object = class_Mandelbrot.Mandelbrot(image_rectangle, image_size, max_iterations)
-    
+    mandelbrot_object = class_mandelbrot.Mandelbrot(image_rectangle, image_size, max_iterations)
+
     start = time.time()
     image = mandelbrot_object.mandelbrot_set()
     time_elapsed = time.time() - start
 
 
 #plot image in window
-    draw_mandelbrot.plot_mandelbrot(image_rectangle, image_size, image, time_elapsed, max_iterations)
+    draw_mandelbrot.plot_mandelbrot(image_rectangle, image_size, image, \
+                                    time_elapsed, max_iterations)
 
 main()

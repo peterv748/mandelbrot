@@ -1,7 +1,6 @@
 """
     mandelbrot class
 """
-
 import numpy as np
 
 class Mandelbrot():
@@ -49,4 +48,3 @@ class Mandelbrot():
             for i, x_coord in enumerate(x_axis_array):
                 image_array[j,i] = self.mandelbrot_calculation(x_coord,y_coord)
         return image_array
-    
