@@ -32,5 +32,6 @@ class Mandelbrot():
 
         for j, y_coord in enumerate(y_axis_array):
             for i, x_coord in enumerate(x_axis_array):
-                image_array[j,i] = complex_calculation_mandelbrot.complex_mandelbrot_calculation(x_coord,y_coord, self.max_iterations)
+                image_array[j,i] = \
+                complex_calculation_mandelbrot.complex_mandelbrot_calculation(x_coord,y_coord, self.max_iterations)
         return image_array

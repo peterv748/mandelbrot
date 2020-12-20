@@ -9,8 +9,8 @@ def complex_mandelbrot_calculation(c_real,c_imag, iterations):
     """
     real = c_real
     imag = c_imag
-    
-    
+
+
     for i in range(iterations):
         real2 = real*real
         imag2 = imag*imag
@@ -28,4 +28,3 @@ if __name__ == "__main__":
     MAXIMUM_ITERATIONS = 200
 
     print(complex_mandelbrot_calculation(REAL, IMAG, MAXIMUM_ITERATIONS))
-    

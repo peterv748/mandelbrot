@@ -8,10 +8,9 @@ adhering to Py_lint standards
 """
 import time
 import numpy as np
-from numba import jit
 from numba import cuda
 import draw_mandelbrot
-import complex_calculation_mandelbrot
+
 
 @cuda.jit(device=True)
 #@jit
@@ -30,7 +29,7 @@ def mandelbrot_calculation(c_real,c_imag,max_iter):
         imag = 2* real*imag + c_imag
         real = real2 - imag2 + c_real
     return max_iter
-    
+
 
 @cuda.jit
 def mandel_kernel(im_rect, image_array, im_size, iters):
@@ -44,8 +43,8 @@ def mandel_kernel(im_rect, image_array, im_size, iters):
     start_y = cuda.blockDim.y * cuda.blockIdx.y + cuda.threadIdx.y
     grid_x = cuda.gridDim.x * cuda.blockDim.x
     grid_y = cuda.gridDim.y * cuda.blockDim.y
-    
-    
+
+
     for i in range(start_x, im_size[0], grid_x):
         real = im_rect[0] + i * pixel_size_x
         for j in range(start_y, im_size[1], grid_y):
@@ -66,7 +65,7 @@ def main():
     grid_dim = (128,128)
     max_iterations = 300
     image = np.zeros((image_size[0], image_size[1]), dtype = np.uint32)
-   
+
 
 # start calculations
 
