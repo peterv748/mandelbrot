@@ -22,7 +22,7 @@ class Mandelbrot():
 
     def mandelbrot_set(self):
         """
-        calclation of the mandelbrot image in a 2-D array
+        calculation of the mandelbrot image in a 2-D array
         """
         stepsize_x = (self.max_x - self.min_x)/self.size_x
         stepsize_y = (self.max_y - self.min_y)/self.size_y
@@ -36,6 +36,10 @@ class Mandelbrot():
                 complex_calculation.complex_mandelbrot_calculation(x_coord,y_coord, \
                                                                    self.max_iterations)
         return image_array
-    
+
     def mandelbrot_number(self):
+        """
+        dummy method to keep pylint happy
+        """
         return self.min_x, self.max_x, self.min_y, self.max_y
+
