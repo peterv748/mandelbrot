@@ -1,6 +1,7 @@
 """
  calculation of mandelbrot set formula
 """
+from numba import jit_module
 
 def complex_mandelbrot_calculation(c_real,c_imag, iterations):
     """
@@ -8,6 +9,8 @@ def complex_mandelbrot_calculation(c_real,c_imag, iterations):
     """
     real = c_real
     imag = c_imag
+    
+    
     for i in range(iterations):
         real2 = real*real
         imag2 = imag*imag
@@ -16,6 +19,8 @@ def complex_mandelbrot_calculation(c_real,c_imag, iterations):
         imag = 2* real*imag + c_imag
         real = real2 - imag2 + c_real
     return iterations
+
+jit_module(nopython=True)
 
 if __name__ == "__main__":
     REAL = 0.3

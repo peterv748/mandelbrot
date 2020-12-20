@@ -2,6 +2,7 @@
     mandelbrot class
 """
 import numpy as np
+import complex_calculation_mandelbrot
 
 class Mandelbrot():
     """
@@ -19,21 +20,6 @@ class Mandelbrot():
         self.size_y = im_size[1]
         self.max_iterations = max_iter
 
-    def mandelbrot_calculation(self, c_real,c_imag):
-        """
-        calculation of mandelbrot set formula
-        """
-        real = c_real
-        imag = c_imag
-        for i in range(self.max_iterations):
-            real2 = real*real
-            imag2 = imag*imag
-            if real2 + imag2 > 4.0:
-                return i
-            imag = 2* real*imag + c_imag
-            real = real2 - imag2 + c_real
-        return self.max_iterations
-
     def mandelbrot_set(self):
         """
         calclation of the mandelbrot image in a 2-D array
@@ -46,5 +32,5 @@ class Mandelbrot():
 
         for j, y_coord in enumerate(y_axis_array):
             for i, x_coord in enumerate(x_axis_array):
-                image_array[j,i] = self.mandelbrot_calculation(x_coord,y_coord)
+                image_array[j,i] = complex_calculation_mandelbrot.complex_mandelbrot_calculation(x_coord,y_coord, self.max_iterations)
         return image_array
