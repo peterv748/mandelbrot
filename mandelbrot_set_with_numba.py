@@ -27,7 +27,7 @@ class OptimizedMandelbrot(class_Mandelbrot.Mandelbrot):
         """
         init of class variables
         """
-        
+
         self.min_x = image_rect[0]
         self.max_x = image_rect[1]
         self.min_y = image_rect[2]

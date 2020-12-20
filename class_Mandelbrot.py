@@ -42,4 +42,3 @@ class Mandelbrot():
         dummy method to keep pylint happy
         """
         return self.min_x, self.max_x, self.min_y, self.max_y
-
