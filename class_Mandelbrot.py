@@ -2,7 +2,7 @@
     mandelbrot class
 """
 import numpy as np
-import complex_calculation_mandelbrot
+import complex_calculation_mandelbrot as complex_calculation
 
 class Mandelbrot():
     """
@@ -33,5 +33,9 @@ class Mandelbrot():
         for j, y_coord in enumerate(y_axis_array):
             for i, x_coord in enumerate(x_axis_array):
                 image_array[j,i] = \
-                complex_calculation_mandelbrot.complex_mandelbrot_calculation(x_coord,y_coord, self.max_iterations)
+                complex_calculation.complex_mandelbrot_calculation(x_coord,y_coord, \
+                                                                   self.max_iterations)
         return image_array
+    
+    def mandelbrot_number(self):
+        return self.min_x, self.max_x, self.min_y, self.max_y
