@@ -9,26 +9,27 @@ adhering to Py_lint standards
 import time
 import numpy as np
 from numba import cuda
+import complex_calculation_mandelbrot
 import draw_mandelbrot
 
 
-@cuda.jit(device=True)
+#@cuda.jit(device=True)
 #@jit
-def mandelbrot_calculation(c_real,c_imag,max_iter):
-    """
-    calculation of mandelbrot set formula using the Numba package and
-    the included cuda support functions to use the GPU of the machine
-    """
-    real = c_real
-    imag = c_imag
-    for i in range(max_iter):
-        real2 = real*real
-        imag2 = imag*imag
-        if real2 + imag2 > 4.0:
-            return i
-        imag = 2* real*imag + c_imag
-        real = real2 - imag2 + c_real
-    return max_iter
+#def mandelbrot_calculation(c_real,c_imag,max_iter):
+#    """
+#    calculation of mandelbrot set formula using the Numba package and
+#    the included cuda support functions to use the GPU of the machine
+#    """
+#    real = c_real
+#    imag = c_imag
+#    for i in range(max_iter):
+#        real2 = real*real
+#        imag2 = imag*imag
+#        if real2 + imag2 > 4.0:
+#            return i
+#        imag = 2* real*imag + c_imag
+#        real = real2 - imag2 + c_real
+#    return max_iter
 
 
 @cuda.jit
@@ -49,7 +50,7 @@ def mandel_kernel(im_rect, image_array, im_size, iters):
         real = im_rect[0] + i * pixel_size_x
         for j in range(start_y, im_size[1], grid_y):
             imag = im_rect[2] + j * pixel_size_y
-            image_array[j, i] = mandelbrot_calculation(real, imag, iters)
+            image_array[j, i] = complex_calculation_mandelbrot.complex_mandelbrot_calculation(real, imag, iters)
 
 
 #initializations of constants

@@ -39,6 +39,6 @@ class Mandelbrot():
 
     def mandelbrot_number(self):
         """
-        dummy method to keep pylint happy
+        dummy method to keep Py_lint happy
         """
         return self.min_x, self.max_x, self.min_y, self.max_y

@@ -18,7 +18,7 @@ def complex_mandelbrot_calculation(c_real,c_imag, iterations):
             return i
         imag = 2* real*imag + c_imag
         real = real2 - imag2 + c_real
-    return iterations
+    return int(iterations)
 
 jit_module(nopython=True)
 
