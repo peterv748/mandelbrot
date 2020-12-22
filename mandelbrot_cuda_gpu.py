@@ -9,7 +9,7 @@ adhering to Py_lint standards
 import time
 import numpy as np
 from numba import cuda
-import complex_calculation_mandelbrot
+import complex_calculation_mandelbrot as cpm
 import draw_mandelbrot
 
 
@@ -50,7 +50,7 @@ def mandel_kernel(im_rect, image_array, im_size, iters):
         real = im_rect[0] + i * pixel_size_x
         for j in range(start_y, im_size[1], grid_y):
             imag = im_rect[2] + j * pixel_size_y
-            image_array[j, i] = complex_calculation_mandelbrot.complex_mandelbrot_calculation(real, imag, iters)
+            image_array[j, i] = cpm.complex_mandelbrot_calculation(real, imag, iters)
 
 
 #initializations of constants
