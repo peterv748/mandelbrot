@@ -10,7 +10,7 @@ removing duplicate code by creating separate modules
 import time
 import numpy as np
 import draw_mandelbrot
-import class_Mandelbrot
+import class_mandelbrot_v1
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
     image_rectangle = np.array([-2, 0.5, -1, 1])
     image_size = np.array([4096,4096])
 
-    mandelbrot_object = class_Mandelbrot.Mandelbrot(image_rectangle, image_size, max_iterations)
+    mandelbrot_object = class_mandelbrot_v1.Mandelbrot(image_rectangle, image_size, max_iterations)
 
     start = time.time()
     image = mandelbrot_object.mandelbrot_set()

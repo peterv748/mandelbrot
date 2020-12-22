@@ -11,14 +11,14 @@ import numpy as np
 from numba.experimental import jitclass
 from numba import int64, float64
 import draw_mandelbrot
-import class_Mandelbrot
+import class_mandelbrot_v1
 
 
 spec = [('min_x', float64),('max_x',float64), \
         ('min_y', float64),('max_y', float64),('size_x',int64), \
         ('size_y',int64),('max_iterations',int64)]
 @jitclass(spec)
-class OptimizedMandelbrot(class_Mandelbrot.Mandelbrot):
+class OptimizedMandelbrot(class_mandelbrot_v1.Mandelbrot):
     """
     Mandelbrot set calculation using numba jit optimization
     """
