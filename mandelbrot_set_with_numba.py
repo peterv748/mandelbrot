@@ -8,16 +8,16 @@ adhering to Py_lint standards
 
 import time
 import numpy as np
-from numba.experimental import jitclass
-from numba import int64, float64
+#from numba.experimental import jitclass
+#from numba import int64, float64
 import draw_mandelbrot
 import class_Mandelbrot
 
 
-spec = [('min_x', float64),('max_x',float64), \
-        ('min_y', float64),('max_y', float64),('size_x',int64), \
-        ('size_y',int64),('max_iterations',int64)]
-@jitclass(spec)
+#spec = [('min_x', float64),('max_x',float64), \
+#        ('min_y', float64),('max_y', float64),('size_x',int64), \
+#        ('size_y',int64),('max_iterations',int64)]
+# @jitclass(spec)
 class OptimizedMandelbrot(class_Mandelbrot.Mandelbrot):
     """
     Mandelbrot set calculation using numba jit optimization
@@ -27,14 +27,14 @@ class OptimizedMandelbrot(class_Mandelbrot.Mandelbrot):
         """
         init of class variables
         """
-
-        self.min_x = image_rect[0]
-        self.max_x = image_rect[1]
-        self.min_y = image_rect[2]
-        self.max_y = image_rect[3]
-        self.size_x = im_size[0]
-        self.size_y = im_size[1]
-        self.max_iterations = max_iter
+        super().__init__(image_rect, im_size, max_iter)
+    #    self.min_x = image_rect[0]
+    #    self.max_x = image_rect[1]
+    #    self.min_y = image_rect[2]
+    #    self.max_y = image_rect[3]
+    #    self.size_x = im_size[0]
+    #    self.size_y = im_size[1]
+    #    self.max_iterations = max_iter
 
     def optimized_mandelbrot_set(self):
         """
