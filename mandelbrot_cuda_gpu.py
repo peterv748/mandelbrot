@@ -19,7 +19,6 @@ def mandel_kernel(im_rect, image_array, im_size, iters):
     """
     pixel_size_x = (im_rect[1] - im_rect[0]) / im_size[0]
     pixel_size_y = (im_rect[3] - im_rect[2]) / im_size[1]
-    start_x, start_y = cuda.grid(2)
     start_x = cuda.blockDim.x * cuda.blockIdx.x + cuda.threadIdx.x
     start_y = cuda.blockDim.y * cuda.blockIdx.y + cuda.threadIdx.y
     grid_x = cuda.gridDim.x * cuda.blockDim.x
