@@ -18,9 +18,9 @@ def main():
     Main function
     """
 
-    max_iterations = 300
-    image_rectangle = np.array([-2, 0.5, -1, 1])
-    image_size = np.array([4096,4096])
+    max_iterations = np.int64(300)
+    image_rectangle = np.array([-2, 0.5, -1, 1], dtype=np.float64)
+    image_size = np.array([4096,4096], dtype=np.int32)
 
     mandelbrot_object = class_mandelbrot_v1.Mandelbrot(image_rectangle, image_size, max_iterations)
 

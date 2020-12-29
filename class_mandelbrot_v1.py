@@ -2,8 +2,14 @@
     mandelbrot class
 """
 import numpy as np
-import complex_calculation_mandelbrot as complex_calculation
+from numba.experimental import jitclass
+from numba import int64, int32, float64
+import complex_calculation_mandelbrot as cmp_calculation
 
+spec = [('min_x', float64),('max_x',float64), \
+        ('min_y', float64),('max_y', float64),('size_x',int64), \
+        ('size_y',int64),('max_iterations',int64)]
+@jitclass(spec)
 class Mandelbrot():
     """
     mandelbrot class
@@ -33,7 +39,7 @@ class Mandelbrot():
         for j, y_coord in enumerate(y_axis_array):
             for i, x_coord in enumerate(x_axis_array):
                 image_array[j,i] = \
-                complex_calculation.complex_mandelbrot_calculation(x_coord,y_coord, \
+                cmp_calculation.complex_mandelbrot_calculation(x_coord,y_coord, \
                                                                    self.max_iterations)
         return image_array
 
