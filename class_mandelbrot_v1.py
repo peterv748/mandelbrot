@@ -3,7 +3,7 @@
 """
 import numpy as np
 from numba.experimental import jitclass
-from numba import int64, int32, float64
+from numba import int64, float64
 import complex_calculation_mandelbrot as cmp_calculation
 
 spec = [('min_x', float64),('max_x',float64), \
